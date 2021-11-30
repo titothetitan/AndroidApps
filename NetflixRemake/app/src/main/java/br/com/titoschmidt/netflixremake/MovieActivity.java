@@ -17,14 +17,13 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.BufferedInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.titoschmidt.netflixremake.model.Movie;
 import br.com.titoschmidt.netflixremake.model.MovieDetail;
-import br.com.titoschmidt.netflixremake.model.util.ImageDownloaderTask;
-import br.com.titoschmidt.netflixremake.model.util.MovieDetailTask;
+import br.com.titoschmidt.netflixremake.util.ImageDownloaderTask;
+import br.com.titoschmidt.netflixremake.util.MovieDetailTask;
 
 public class MovieActivity extends AppCompatActivity implements MovieDetailTask.MovieDetailLoader {
 

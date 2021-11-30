@@ -1,4 +1,4 @@
-package br.com.titoschmidt.netflixremake.model.util;
+package br.com.titoschmidt.netflixremake.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

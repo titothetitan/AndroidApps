@@ -1,4 +1,4 @@
-package br.com.titoschmidt.netflixremake.model.util;
+package br.com.titoschmidt.netflixremake.util;
 
 import android.app.ProgressDialog;
 import android.content.Context;
