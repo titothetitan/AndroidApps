@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Fitness Tracker</string>
+    <string name="label_IMC">IMC</string>
+    <string name="imc_desc">IMC é a sigla para Índice de Massa Corporal que serve para avaliar o peso do indivíduo em relação à sua altura e assim indicar se está dentro do peso ideal, acima ou abaixo do peso desejado.\n\nPreencha os campos de peso e altura para descobrir o seu IMC.</string>
+    <string name="peso">Peso (kg)</string>
+    <string name="altura">Altura (cm)</string>
+    <string name="calcular">Calcular</string>
+    <string name="campo_invalido">Todos os campos devem ser maiores do que zero.</string>
+    <string name="imc_severamente_abaixo">Severamente abaixo do peso.</string>
+    <string name="imc_severamente_acima">Severamente acima do peso.</string>
+    <string name="imc_muito_abaixo">Muito abaixo do peso.</string>
+    <string name="imc_abaixo">Abaixo do peso.</string>
+    <string name="imc_normal">Normal.</string>
+    <string name="imc_acima">Acima do peso.</string>
+    <string name="imc_muito_acima">Muito acima do peso.</string>
+    <string name="imc_extremamente_acima">Extremamente acima do peso.</string>
+    <string name="resposta_imc">Imc: %1$.2f</string>
+    <string name="resposta_tmb">Tmb: %1$.2f</string>
+    <string name="label_TMB">TMB</string>
+    <string name="salvar">Salvar</string>
+    <string name="registro_salvo">Registro salvo com sucesso!</string>
+    <string name="buscar">buscar</string>
+    <string name="tmb_desc">TMB é o cálculo para descobrir a quantidade calórica que o corpo necessita com base no seu estilo de vida.</string>
+    <string name="idade">Idade</string>
+    <string name="label_conselhos">Conselhos</string>
+    <string name="label_hidratacao">Hidratação</string>
+    <string name="label_dieta">Dieta</string>
+    <string name="label_exercicios">Exercícios</string>
+</resources>

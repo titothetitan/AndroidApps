@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="@color/light"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Conselhos">
+
+        <TextView
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="4dp"
+            android:textStyle="bold"
+            android:text="8 conselhos infalíveis para uma vida saudável!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/edit_conselhos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:justificationMode="inter_word"
+            android:inputType="textMultiLine"
+            android:text="@string/conselhos" />
+    </LinearLayout>
+
+</ScrollView>
+
