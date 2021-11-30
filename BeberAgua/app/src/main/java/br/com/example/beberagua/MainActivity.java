@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         calendar.set(Calendar.SECOND, 0);
         // Ativa a notificação e o alarme
         if (adicionado) {
-            // Passa os parâmetros para a notificação
+            // Passa os parâmetros para a notificação!
             notificationIntent.putExtra(NotificationPublisher.KEY_NOTIFICATION_ID, 1);
             notificationIntent.putExtra(NotificationPublisher.KEY_NOTIFICATION, "Hora de beber água!");
             // Ao tocar na notificação vai reabrir a MainActivity
