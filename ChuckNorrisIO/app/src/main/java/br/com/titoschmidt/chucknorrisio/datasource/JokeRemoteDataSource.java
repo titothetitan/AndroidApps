@@ -11,10 +11,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
 import br.com.titoschmidt.chucknorrisio.models.Joke;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class JokeRemoteDataSource {
 
@@ -27,7 +31,28 @@ public class JokeRemoteDataSource {
     }
 
     public void findJokeBy(JokeCallback callback, String category){
-        new JokeTask(callback, category).execute();
+        //Cria uma instância concreta do Retrofit e passa a API com todos os métodos disponíveis
+        HTTPClient.retrofit().create(ChuckNorrisAPI.class)
+                .findRandomBy(category)
+                .enqueue(new Callback<Joke>() {
+                    @Override
+                    public void onResponse(Call<Joke> call, Response<Joke> response) {
+                        if(response.isSuccessful())
+                            callback.onSuccess(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Joke> call, Throwable t) {
+                        // Mostra uma msg de erro
+                        callback.onError(t.getMessage());
+                        // Esconde a progress bar
+                        callback.onComplete();
+                    }
+                });
+
+
+        // Método antigo sem uso de Retrofit
+        //new JokeTask(callback, category).execute();
     }
 
     private static class JokeTask extends AsyncTask<Void, Void, Joke>{
