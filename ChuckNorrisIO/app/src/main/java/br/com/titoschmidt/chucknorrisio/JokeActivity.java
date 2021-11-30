@@ -1,16 +1,20 @@
 package br.com.titoschmidt.chucknorrisio;
 
 import android.app.ProgressDialog;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.navigation.ui.AppBarConfiguration;
+
+import com.squareup.picasso.Picasso;
 
 import br.com.titoschmidt.chucknorrisio.databinding.ActivityJokeBinding;
 import br.com.titoschmidt.chucknorrisio.datasource.JokeRemoteDataSource;
@@ -63,6 +67,8 @@ public class JokeActivity extends AppCompatActivity {
     public void mostraJoke(Joke joke){
         TextView txtJoke = findViewById(R.id.txt_joke);
         txtJoke.setText(joke.getValue());
+        ImageView icone = findViewById(R.id.img_icon);
+        Picasso.get().load(joke.getIconUrl()).into(icone);
     }
 
     public void mostraFalha(String msgErro){
