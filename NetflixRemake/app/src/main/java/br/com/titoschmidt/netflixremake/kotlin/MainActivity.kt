@@ -1,5 +1,6 @@
 package br.com.titoschmidt.netflixremake.kotlin
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.titoschmidt.netflixremake.MainActivity
+import br.com.titoschmidt.netflixremake.MovieActivity
 import br.com.titoschmidt.netflixremake.R
 import br.com.titoschmidt.netflixremake.model.Category
 import br.com.titoschmidt.netflixremake.model.Movie
@@ -34,9 +36,9 @@ class MainActivity : AppCompatActivity() {
         recycler_view_main.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
         var categoryTask = CategoryTask(this)
-        categoryTask.setCategoryLoader { categories ->
+        categoryTask.setCategoryLoader {
             mainAdapter.categories.clear()
-            mainAdapter.categories.addAll(categories)
+            mainAdapter.categories.addAll(it) // it = categories
             mainAdapter.notifyDataSetChanged()
         }
         categoryTask.execute("https://tiagoaguiar.co/api/netflix/home")
@@ -51,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
-            var category : Category = categories[position]
+            val category : Category = categories[position]
             holder.vincula(category)
         }
 
@@ -59,12 +61,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private inner class MovieAdapter(val movies : List<Movie>) : RecyclerView.Adapter<MovieHolder>() {
+
+        val onClick: ((Int) -> Unit)? = { position ->
+            if(movies[position].id <= 3) {
+                val intent = Intent(this@MainActivity, MovieActivity::class.java)
+                intent.putExtra("id", movies[position].id)
+                startActivity(intent)
+            }
+        }
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
-            return MovieHolder(layoutInflater.inflate(R.layout.movie_item, parent, false))
+            return MovieHolder(layoutInflater.inflate(
+                    R.layout.movie_item,
+                    parent,
+                    false),
+                    onClick
+            )
         }
 
         override fun onBindViewHolder(holder: MovieHolder, position: Int) {
-            var movie : Movie = movies[position]
+            val movie : Movie = movies[position]
             holder.vincula(movie)
         }
 
@@ -78,12 +94,12 @@ class MainActivity : AppCompatActivity() {
             itemView.recycler_view_movie.layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
         }
     }
-
-    private class MovieHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+                                                                     // unit = void
+    private class MovieHolder(itemView: View, val onClick: ((Int) -> Unit)?) : RecyclerView.ViewHolder(itemView){
         fun vincula(movie : Movie){
             ImageDownloaderTask(itemView.image_view_cover).execute(movie.coverUrl)
             itemView.image_view_cover.setOnClickListener{
-
+                onClick?.invoke(adapterPosition) // Pega o ID do filme atual que foi clicado
             }
         }
     }
