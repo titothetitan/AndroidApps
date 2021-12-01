@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             text_view_title.text = category.nome
             recycler_view_movie.adapter = MovieAdapter(category.movies) { movie : Movie ->
                 if(movie.id > 3) {
-
+                    Toast.makeText(this@MainActivity, "Somente os três primeiros filmes implmentados.", Toast.LENGTH_SHORT).show()
                 } else {
                     val intent = Intent(this@MainActivity, MovieActivity::class.java)
                     intent.putExtra("id", movie.id)
