@@ -2,14 +2,11 @@ package br.com.titoschmidt.netflixremake.kotlin
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.titoschmidt.netflixremake.MainActivity
 import br.com.titoschmidt.netflixremake.MovieActivity
 import br.com.titoschmidt.netflixremake.R
 import br.com.titoschmidt.netflixremake.model.Category
@@ -60,46 +57,46 @@ class MainActivity : AppCompatActivity() {
         override fun getItemCount(): Int = categories.size
     }
 
-    private inner class MovieAdapter(val movies : List<Movie>) : RecyclerView.Adapter<MovieHolder>() {
+    private inner class MovieAdapter(val movies : List<Movie>, private val listener: ((Movie) -> Unit)?) : RecyclerView.Adapter<MovieHolder>() {
 
         val onClick: ((Int) -> Unit)? = { position ->
-            if(movies[position].id <= 3) {
-                val intent = Intent(this@MainActivity, MovieActivity::class.java)
-                intent.putExtra("id", movies[position].id)
-                startActivity(intent)
-            }
+
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
-            return MovieHolder(layoutInflater.inflate(
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder =
+             MovieHolder(layoutInflater.inflate(
                     R.layout.movie_item,
                     parent,
                     false),
-                    onClick
+                    listener
             )
-        }
 
-        override fun onBindViewHolder(holder: MovieHolder, position: Int) {
-            val movie : Movie = movies[position]
-            holder.vincula(movie)
-        }
+        override fun onBindViewHolder(holder: MovieHolder, position: Int):Unit = holder.vincula(movies[position])
 
         override fun getItemCount(): Int = movies.size
     }
 
     private inner class CategoryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun vincula(category: Category) {
-            itemView.text_view_title.text = category.nome
-            itemView.recycler_view_movie.adapter = MovieAdapter(category.filmes)
-            itemView.recycler_view_movie.layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
+        fun vincula(category: Category):Unit = with(itemView){
+            text_view_title.text = category.nome
+            recycler_view_movie.adapter = MovieAdapter(category.movies) { movie : Movie ->
+                if(movie.id > 3) {
+
+                } else {
+                    val intent = Intent(this@MainActivity, MovieActivity::class.java)
+                    intent.putExtra("id", movie.id)
+                    startActivity(intent)
+                }
+            }
+            recycler_view_movie.layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
         }
     }
                                                                      // unit = void
-    private class MovieHolder(itemView: View, val onClick: ((Int) -> Unit)?) : RecyclerView.ViewHolder(itemView){
+    private class MovieHolder(itemView: View, val onClick: ((Movie) -> Unit)?) : RecyclerView.ViewHolder(itemView){
         fun vincula(movie : Movie){
             ImageDownloaderTask(itemView.image_view_cover).execute(movie.coverUrl)
             itemView.image_view_cover.setOnClickListener{
-                onClick?.invoke(adapterPosition) // Pega o ID do filme atual que foi clicado
+                onClick?.invoke(movie) // Pega o ID do filme atual que foi clicado
             }
         }
     }

@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements CategoryTask.Cate
         public void onBindViewHolder(@NonNull CategoryHolder holder, int position) {
             Category categoria = categories.get(position);
             holder.textViewtitulo.setText(categoria.getNome());
-            holder.recyclerViewMovie.setAdapter(new MovieAdapter(categoria.getFilmes()));
+            holder.recyclerViewMovie.setAdapter(new MovieAdapter(categoria.getMovies()));
             holder.recyclerViewMovie.setLayoutManager(new LinearLayoutManager(getBaseContext(), RecyclerView.HORIZONTAL, false));
         }
 
