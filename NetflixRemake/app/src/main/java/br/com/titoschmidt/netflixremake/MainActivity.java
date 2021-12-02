@@ -56,35 +56,15 @@ public class MainActivity extends AppCompatActivity implements CategoryTask.Cate
 
         public CategoryHolder(@NonNull View itemView) {                        // obs: Uma CategoryHolder vai ter n MovieHolders dentro dela!
             // itemView é o container dinâmico principal da célula category_item, ou seja, o constraintlayout de category_item.xml
-            // que foi definido em '.inflate(R.layout.movie_item'
+            // que foi definido no MainAdapter em '.inflate(R.layout.movie_item'
             super(itemView);
             // como eu inflei o category_item.xml no MainAdapter, eu posso obter com findViewById os elementos dentro do category_item.xml!
-            textViewtitulo = itemView.findViewById(R.id.text_view_title);
+            textViewtitulo = itemView.findViewById(R.id.text_view_category_title);
             recyclerViewMovie = itemView.findViewById(R.id.recycler_view_movie);
         }
     }
 
-    // Classe de ViewHolder para gerenciar o layout do filme
-    private static class MovieHolder extends RecyclerView.ViewHolder{
-        final ImageView imageViewCover;
-
-        // Construtor
-        public MovieHolder(@NonNull View itemView, final OnItemClickListener onItemClickListener) {
-            // itemView é o container dinâmico principal da célula movie_item, ou seja, o constraintlayout de movie_item.xml
-            // que foi definido em '.inflate(R.layout.movie_item'
-            super(itemView);
-            // como eu inflei o movie_item.xml no MovieAdapter, eu posso obter com findViewById os elementos dentro do movie_item.xml!
-            imageViewCover = itemView.findViewById(R.id.image_view_cover);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // Pega o ID do filme atual que foi clicado
-                    onItemClickListener.onClick(getAdapterPosition());
-                }
-            });
-        }
-    }
-    // Classe de Adapter vai gerenciar a CategoryHolder
+    // Classe que vai gerenciar a CategoryHolder
     private class MainAdapter extends RecyclerView.Adapter<CategoryHolder>{
 
         private List<Category> categories;
@@ -97,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements CategoryTask.Cate
         @Override
         // no OnCreate informa-se qual layout.xml será exibido e manipulado, aqui no caso será category_item.xml
         public CategoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-           return new CategoryHolder(getLayoutInflater().inflate(R.layout.category_item, parent, false)); // false, pois a raiz é o constraintlayout
+            return new CategoryHolder(getLayoutInflater().inflate(R.layout.category_item, parent, false)); // false, pois a raiz é o constraintlayout
         }
 
         @Override
@@ -122,7 +102,29 @@ public class MainActivity extends AppCompatActivity implements CategoryTask.Cate
         }
     }
 
-    // Classe de Adapter vai gerenciar a MovieHolder
+    // Classe de ViewHolder para gerenciar o layout do filme
+    private static class MovieHolder extends RecyclerView.ViewHolder{
+        final ImageView imageViewCover;
+
+        // Construtor
+        public MovieHolder(@NonNull View itemView, final OnItemClickListener onItemClickListener) {
+            // itemView é o container dinâmico principal da célula movie_item, ou seja, o constraintlayout de movie_item.xml
+            // que foi definido em '.inflate(R.layout.movie_item'
+            super(itemView);
+            // como eu inflei o movie_item.xml no MovieAdapter, eu posso obter com findViewById os elementos dentro do movie_item.xml!
+            imageViewCover = itemView.findViewById(R.id.image_view_cover);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Pega o ID do filme atual que foi clicado
+                    onItemClickListener.onClick(getAdapterPosition());
+                }
+            });
+        }
+    }
+
+
+    // Classe para gerenciar a MovieHolder e os cliques nos filmes
     private class MovieAdapter extends RecyclerView.Adapter<MovieHolder> implements OnItemClickListener{
 
         private final List<Movie> filmes;

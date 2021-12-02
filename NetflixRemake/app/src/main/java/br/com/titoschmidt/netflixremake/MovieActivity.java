@@ -39,7 +39,7 @@ public class MovieActivity extends AppCompatActivity implements MovieDetailTask.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
 
-        txtTitulo = findViewById(R.id.text_view_titulo);
+        txtTitulo = findViewById(R.id.text_view_movie_title);
         txtDesc = findViewById(R.id.text_view_desc);
         txtCast = findViewById(R.id.text_view_cast);
         recyclerView = findViewById(R.id.recycler_view_similar);
@@ -48,10 +48,11 @@ public class MovieActivity extends AppCompatActivity implements MovieDetailTask.
         Toolbar toolbar = findViewById(R.id.toolbar);
         // Seta a toolbar para torná-la compatível com todos os dispositivos
         setSupportActionBar(toolbar);
+
         if(getSupportActionBar() != null){
             // Exibe o ícone Home
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            // Exibe o ícone o ícone Voltar
+            // Exibe o ícone Voltar
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
             // Remove o título da Toolbar
             getSupportActionBar().setTitle(null);
@@ -59,7 +60,7 @@ public class MovieActivity extends AppCompatActivity implements MovieDetailTask.
 
         // obs: ContextCompact possui vários métodos estáticos para tornar dispositivos compatíveis
 
-        /* O código abaixo está acessando uma propriedade em shadows.xml
+        /* O If abaixo está acessando a propriedade em shadows.xml
 
                <item android:id="@+id/cover_drawable" android:drawable="@drawable/movie_4"/>
 
