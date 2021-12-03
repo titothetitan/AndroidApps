@@ -19,7 +19,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.titoschmidt.netflixremake.model.Category;
 import br.com.titoschmidt.netflixremake.model.Movie;
 import br.com.titoschmidt.netflixremake.model.MovieDetail;
 

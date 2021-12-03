@@ -5,7 +5,6 @@ package br.com.titoschmidt.netflixremake.model
  * @author titoesa@gmail.com (Tito Schmidt).
  *
  */
-class Movies {
 
     data class Category(var name: String = "",
                          var movies: List<Movie> = arrayListOf())
@@ -18,4 +17,3 @@ class Movies {
 
     data class MovieDetail(var movie: Movie,
                            var movieSimilar: List<Movie>)
-}

@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements CategoryTask.Cate
         // Enquanto rola na vertical, o OnBind vai desenhando categoria com filmes na horizontal
         public void onBindViewHolder(@NonNull CategoryHolder holder, int position) {
             Category categoria = categories.get(position);
-            holder.textViewtitulo.setText(categoria.getNome());
+            holder.textViewtitulo.setText(categoria.getName());
             holder.recyclerViewMovie.setAdapter(new MovieAdapter(categoria.getMovies()));
             holder.recyclerViewMovie.setLayoutManager(new LinearLayoutManager(getBaseContext(), RecyclerView.HORIZONTAL, false));
         }

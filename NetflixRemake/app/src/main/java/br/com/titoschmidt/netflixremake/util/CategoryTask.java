@@ -51,7 +51,7 @@ public class CategoryTask extends AsyncTask<String, Void, List<Category>> {
         this.context = new WeakReference<>(context);
     }
 
-    public void setCategoryLoader(CategoryLoader categoryLoader){
+    public void setCategoryLoader(CategoryLoader categoryLoader) {
         this.categoryLoader = categoryLoader;
     }
 
@@ -60,8 +60,8 @@ public class CategoryTask extends AsyncTask<String, Void, List<Category>> {
     protected void onPreExecute() {
         super.onPreExecute();
         Context context = this.context.get();
-        if(context != null){
-            dialog = ProgressDialog.show(context,"Carregando...","", true);
+        if (context != null) {
+            dialog = ProgressDialog.show(context, "Carregando...", "", true);
         }
     }
 
@@ -78,7 +78,7 @@ public class CategoryTask extends AsyncTask<String, Void, List<Category>> {
             // pega a resposta do servidor
             int responseCode = urlConnection.getResponseCode();
             // se a resposta for maior que 400 então algo deu errado
-            if(responseCode > 400){
+            if (responseCode > 400) {
                 throw new IOException("Erro na comunicação do servidor");
             }
             // converte os dados vindos da internet (inputStream) para String, depois para Json, depois para listas de objetos Java
@@ -108,13 +108,13 @@ public class CategoryTask extends AsyncTask<String, Void, List<Category>> {
 
         JSONArray categoryArray = json.getJSONArray("category");
 
-        for(int i=0; i<categoryArray.length(); i++){
+        for (int i = 0; i < categoryArray.length(); i++) {
             JSONObject categoria = categoryArray.getJSONObject(i);
             String title = categoria.getString("title");
 
             JSONArray filmesArray = categoria.getJSONArray("movie");
             List<Movie> filmes = new ArrayList<>();
-            for(int j=0;j<filmesArray.length();j++){
+            for (int j = 0; j < filmesArray.length(); j++) {
 
                 JSONObject filme = filmesArray.getJSONObject(j);
                 int id = filme.getInt("id");
@@ -126,7 +126,7 @@ public class CategoryTask extends AsyncTask<String, Void, List<Category>> {
 
             }
             Category categoriaObj = new Category();
-            categoriaObj.setNome(title);
+            categoriaObj.setName(title);
             categoriaObj.setMovies(filmes);
             categorias.add(categoriaObj);
         }
@@ -138,7 +138,7 @@ public class CategoryTask extends AsyncTask<String, Void, List<Category>> {
     protected void onPostExecute(List<Category> categories) {
         super.onPostExecute(categories);
         dialog.dismiss();
-        if(categoryLoader != null){
+        if (categoryLoader != null) {
             categoryLoader.onResult(categories);
         }
     }
@@ -147,8 +147,8 @@ public class CategoryTask extends AsyncTask<String, Void, List<Category>> {
         byte[] bytes = new byte[1024];
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         int lidos;
-        while((lidos = is.read(bytes)) >0){
-            baos.write(bytes, 0 , lidos);
+        while ((lidos = is.read(bytes)) > 0) {
+            baos.write(bytes, 0, lidos);
         }
         return new String(baos.toByteArray());
     }

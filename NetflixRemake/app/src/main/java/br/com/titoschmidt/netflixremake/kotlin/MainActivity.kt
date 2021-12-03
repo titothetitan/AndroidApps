@@ -1,9 +1,7 @@
 package br.com.titoschmidt.netflixremake.kotlin
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -14,7 +12,6 @@ import br.com.titoschmidt.netflixremake.R
 import br.com.titoschmidt.netflixremake.model.Category
 import br.com.titoschmidt.netflixremake.model.Movie
 import br.com.titoschmidt.netflixremake.util.CategoryTask
-import br.com.titoschmidt.netflixremake.util.ImageDownloaderTask
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.category_item.view.*
@@ -48,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     private inner class CategoryHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         fun bind(category: Category) = with(itemView) {
-            text_view_category_title.text = category.nome
+            text_view_category_title.text = category.name
             // Toda vez que rolar uma categoria nova cria um adapter de filmes
             recycler_view_movie.adapter = MovieAdapter(category.movies) { movie : Movie ->
                 if(movie.id > 3){
