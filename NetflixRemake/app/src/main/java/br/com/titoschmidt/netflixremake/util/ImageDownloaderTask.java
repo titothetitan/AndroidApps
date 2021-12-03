@@ -92,8 +92,6 @@ public class ImageDownloaderTask extends AsyncTask <String, Void, Bitmap> {
                     bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),bitmap.getHeight(), matrix, false);
                 }
             }
-
-
             imageView.setImageBitmap(bitmap);
         }
     }

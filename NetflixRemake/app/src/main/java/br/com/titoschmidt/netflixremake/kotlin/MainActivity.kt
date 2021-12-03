@@ -1,5 +1,6 @@
 package br.com.titoschmidt.netflixremake.kotlin
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -14,12 +15,13 @@ import br.com.titoschmidt.netflixremake.model.Category
 import br.com.titoschmidt.netflixremake.model.Movie
 import br.com.titoschmidt.netflixremake.util.CategoryTask
 import br.com.titoschmidt.netflixremake.util.ImageDownloaderTask
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.category_item.view.*
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class MainActivity : AppCompatActivity() {
-    // lateinit vai inicializar depois que a Activity tomar vida
+    // lateinit vai inicializar depois que a Activity ganhar vida
     private lateinit var categoryAdapter : CategoryAdapter
 
     // ? = aceita Null
@@ -40,7 +42,6 @@ class MainActivity : AppCompatActivity() {
             categoryAdapter.categories.clear()
             categoryAdapter.categories.addAll(it) // it = categories
             categoryAdapter.notifyDataSetChanged()
-
         }
         categoryTask.execute("https://tiagoaguiar.co/api/netflix/home")
     }
@@ -77,8 +78,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private class MovieHolder(itemView: View, val onClick: ((Movie) -> Unit)?) : RecyclerView.ViewHolder(itemView) {
-        fun bind(movie : Movie){
-            ImageDownloaderTask(itemView.image_view_cover).execute(movie.getCoverUrl());
+        fun bind(movie : Movie) = with(itemView){
+            // Faz o download da imagem da maneira antiga
+            //ImageDownloaderTask(itemView.image_view_cover).execute(movie.getCoverUrl());
+            Glide
+                .with(context)
+                .load(movie.coverUrl)
+                .placeholder(R.drawable.placeholder_bg)
+                .into(image_view_cover)
+
             itemView.setOnClickListener {
                 onClick?.invoke(movie) // Pega o filme atual que foi clicado
             }

@@ -211,7 +211,13 @@ public class ListCalcActivity extends AppCompatActivity {
                     }
                 });
 
-                tv.setText(id + " " + type + " " + Conversor.round(response,2));
+                switch (type){
+                    case "imc":
+                        tv.setText("Seu IMC: [" + Conversor.round(response,2) + "] Em: "+createdDate);
+                        break;
+                    case "tmb":
+                        tv.setText("Seu TMB: [" + Conversor.round(response,2) + "] Em: "+createdDate);
+                }
             }
         }
     }
