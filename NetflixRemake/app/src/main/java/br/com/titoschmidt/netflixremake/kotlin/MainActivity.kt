@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.titoschmidt.netflixremake.R
+import br.com.titoschmidt.netflixremake.model.Categories
 import br.com.titoschmidt.netflixremake.model.Category
 import br.com.titoschmidt.netflixremake.model.Movie
 import br.com.titoschmidt.netflixremake.util.CategoryTask
@@ -16,6 +17,10 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.category_item.view.*
 import kotlinx.android.synthetic.main.movie_item.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     // lateinit vai inicializar depois que a Activity ganhar vida
@@ -27,20 +32,39 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val categories = arrayListOf<Category>()
-        val categoryTask = CategoryTask(this)
+        //val categoryTask = CategoryTask(this)
 
         categoryAdapter = CategoryAdapter(categories)
 
         recycler_view_main.adapter = categoryAdapter
         recycler_view_main.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        // Preencher as categorias
-        categoryTask.setCategoryLoader {
+        // Preencher as categorias de maneira nativa
+        /*categoryTask.setCategoryLoader {
             //no Java é como se fosse o método onResult ao implementar a Interface
             categoryAdapter.categories.clear()
             categoryAdapter.categories.addAll(it) // it = categories
             categoryAdapter.notifyDataSetChanged()
-        }
-        categoryTask.execute("https://tiagoaguiar.co/api/netflix/home")
+        }*/
+        // Busca as categorias de maneira nativa
+        //categoryTask.execute("https://tiagoaguiar.co/api/netflix/home");
+        // Busca as cateogrias com Retrofit
+        retrofit().create(NetflixAPI::class.java)
+            .listCategories()         // Categories é o data model criado em Movies.kt
+            .enqueue(object : Callback<Categories> {
+                override fun onResponse(call: Call<Categories>, response: Response<Categories>) {
+                   if(response.isSuccessful){
+                       response.body()?.let {
+                           categoryAdapter.categories.clear()
+                           categoryAdapter.categories.addAll(it.categories)
+                           categoryAdapter.notifyDataSetChanged()
+                       }
+                   }
+                }
+
+                override fun onFailure(call: Call<Categories>, t: Throwable) {
+                    Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_SHORT).show()
+                }
+            });
     }
 
     private inner class CategoryHolder(itemView : View) : RecyclerView.ViewHolder(itemView){

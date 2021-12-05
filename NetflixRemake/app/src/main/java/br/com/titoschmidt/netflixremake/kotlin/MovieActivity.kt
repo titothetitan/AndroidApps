@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -26,6 +27,9 @@ import kotlinx.android.synthetic.main.activity_movie.*
 import kotlinx.android.synthetic.main.activity_movie.view.*
 import kotlinx.android.synthetic.main.movie_item.view.*
 import kotlinx.android.synthetic.main.movie_item_similar.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MovieActivity : AppCompatActivity() {
 
@@ -40,56 +44,79 @@ class MovieActivity : AppCompatActivity() {
         if(extras != null){
             val id : Int = extras.getInt("id")
             val movieDetailTask = MovieDetailTask(this)
+
+            retrofit().create(NetflixAPI::class.java)
+                .getMovieById(id)
+                .enqueue(object : Callback<MovieDetail> {
+                    override fun onResponse(
+                        call: Call<MovieDetail>,
+                        response: Response<MovieDetail>
+                    ) {
+                        if(response.isSuccessful){
+                            response.body()?.let { movieDetail : MovieDetail ->
+                                text_view_movie_title.text = movieDetail.title
+                                text_view_desc.text = movieDetail.description
+                                text_view_cast.text = movieDetail.cast
+
+                                // Carrega a imagem usando Glide
+                                Glide
+                                    .with(this@MovieActivity)
+                                    .load(movieDetail.coverUrl)
+                                    // Escuta os eventos de download
+                                    // Intercepta a imagem vinda e adiciona-a no shadows.xml para receber efeito de sombreamento
+                                    .listener(object : RequestListener<Drawable> {
+                                        override fun onLoadFailed(
+                                            e: GlideException?,
+                                            model: Any?,
+                                            target: Target<Drawable>?,
+                                            isFirstResource: Boolean
+                                        ): Boolean {
+                                            return true
+                                        }
+
+                                        override fun onResourceReady(
+                                            resource: Drawable?,
+                                            model: Any?,
+                                            target: Target<Drawable>?,
+                                            dataSource: DataSource?,
+                                            isFirstResource: Boolean
+                                        ): Boolean {
+                                            val drawable: LayerDrawable? = ContextCompat.getDrawable(baseContext, R.drawable.shadows) as LayerDrawable?
+                                            drawable?.let {
+                                                drawable.setDrawableByLayerId(R.id.cover_drawable, resource)
+                                                (target as DrawableImageViewTarget).view.setImageDrawable(drawable)
+                                            }
+                                            return true
+                                        }
+                                    })
+                                    .into(image_view_cover)
+                                movieAdapter.movies.clear()
+                                movieAdapter.movies.addAll(movieDetail.moviesSimilar)
+                                movieAdapter.notifyDataSetChanged()
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<MovieDetail>, t: Throwable) {
+                        Toast.makeText(this@MovieActivity, t.message, Toast.LENGTH_SHORT).show()
+                    }
+
+                })
+
+            /*
             movieDetailTask.setMovieDetailLoader { movieDetail : MovieDetail ->
                 text_view_movie_title.text = movieDetail.movie.title
                 text_view_desc.text = movieDetail.movie.description
                 text_view_cast.text = movieDetail.movie.cast
-
+            */
                 /* Carrega a imagem da maneira antiga
                 ImageDownloaderTask(image_view_cover).apply {
                     setShadowEnabled(true)
                     execute(movieDetail.movie.coverUrl)
                 }
                 */
-                // Carrega a imagem usando Glide
-                Glide
-                    .with(this)
-                    .load(movieDetail.movie.coverUrl)
-                     // Escuta os eventos de download
-                     // Intercepta a imagem vinda e adiciona-a no shadows.xml para receber efeito de sombreamento
-                    .listener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(
-                            e: GlideException?,
-                            model: Any?,
-                            target: Target<Drawable>?,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            return true
-                        }
-
-                        override fun onResourceReady(
-                            resource: Drawable?,
-                            model: Any?,
-                            target: Target<Drawable>?,
-                            dataSource: DataSource?,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            val drawable: LayerDrawable? = ContextCompat.getDrawable(baseContext, R.drawable.shadows) as LayerDrawable?
-                            drawable?.let {
-                                drawable.setDrawableByLayerId(R.id.cover_drawable, resource)
-                                (target as DrawableImageViewTarget).view.setImageDrawable(drawable)
-                            }
-                            return true
-                        }
-
-                    })
-                    .into(image_view_cover)
-
-                movieAdapter.movies.clear()
-                movieAdapter.movies.addAll(movieDetail.movieSimilar)
-                movieAdapter.notifyDataSetChanged()
             }
-            movieDetailTask.execute("https://tiagoaguiar.co/api/netflix/$id")
+            //movieDetailTask.execute("https://tiagoaguiar.co/api/netflix/$id")
 
             // Seta a toolbar para torná-la compatível com todos os dispositivos
             setSupportActionBar(toolbar)
@@ -104,7 +131,6 @@ class MovieActivity : AppCompatActivity() {
             movieAdapter = MovieAdapter(movies)
             recycler_view_similar.adapter = movieAdapter
             recycler_view_similar.layoutManager = GridLayoutManager(this,3)
-        }
     }
     //Button Voltar <--
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

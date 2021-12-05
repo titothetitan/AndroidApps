@@ -85,9 +85,7 @@ public class SplashActivity extends AppCompatActivity {
         handler.removeCallbacks(mHidePart2Runnable);
         handler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
-
-
-
+    
     private void delayedHide(int delayMillis) {
         handler.removeCallbacks(mHideRunnable);
         handler.postDelayed(mHideRunnable, delayMillis);

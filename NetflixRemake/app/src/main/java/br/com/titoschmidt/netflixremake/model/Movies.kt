@@ -1,19 +1,27 @@
 package br.com.titoschmidt.netflixremake.model
 
+import com.google.gson.annotations.SerializedName
+
 /*
  * 03/12/2021
  * @author titoesa@gmail.com (Tito Schmidt).
  *
  */
 
-    data class Category(var name: String = "",
-                         var movies: List<Movie> = arrayListOf())
+    data class Categories(@SerializedName("category") val categories: List<Category>)
+
+    data class Category(@SerializedName("title")var name: String = "",
+                        @SerializedName("movie")var movies: List<Movie> = arrayListOf())
 
     data class Movie(var id: Int = 0,
                      var title: String = "",
                      var description: String = "",
                      var cast: String = "",
-                     var coverUrl: String = "")
+                     @SerializedName("cover_url")var coverUrl: String = "")
 
-    data class MovieDetail(var movie: Movie,
-                           var movieSimilar: List<Movie>)
+    data class MovieDetail(var id: Int = 0,
+                           var title: String = "",
+                           var description: String = "",
+                           var cast: String = "",
+                           @SerializedName("cover_url")var coverUrl: String = "",
+                           @SerializedName("movie") val moviesSimilar: List<Movie>)

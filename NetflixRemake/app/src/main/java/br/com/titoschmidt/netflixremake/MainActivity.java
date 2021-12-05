@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements CategoryTask.Cate
 
         CategoryTask categoryTask = new CategoryTask(this);
         categoryTask.setCategoryLoader(this);
+
         categoryTask.execute("https://tiagoaguiar.co/api/netflix/home");
+
     }
     // Método vindo da interface CategoryTask.CategoryLoader para popular as categorias
     @Override
@@ -145,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements CategoryTask.Cate
         // Pega o ID do filme durante a rolagem
         public void onBindViewHolder(@NonNull MovieHolder holder, int position) {
             Movie filme = filmes.get(position);
-            // Busca a imagem no servidor durante a rolagem e preenche a view
+            // Faz download da imagem durante a rolagem e preenche a view
             new ImageDownloaderTask(holder.imageViewCover).execute(filme.getCoverUrl());
         }
 

@@ -98,15 +98,15 @@ public class MovieActivity extends AppCompatActivity implements MovieDetailTask.
 
     @Override
     public void onResult(MovieDetail movieDetail) {
-        txtTitulo.setText(movieDetail.getMovie().getTitle());
-        txtDesc.setText(movieDetail.getMovie().getDescription());
-        txtCast.setText(movieDetail.getMovie().getCast());
+        txtTitulo.setText(movieDetail.getTitle());
+        txtDesc.setText(movieDetail.getDescription());
+        txtCast.setText(movieDetail.getCast());
 
         ImageDownloaderTask imageDownloaderTask = new ImageDownloaderTask(imgCover);
         imageDownloaderTask.setShadowEnabled(true);
-        imageDownloaderTask.execute(movieDetail.getMovie().getCoverUrl());
+        imageDownloaderTask.execute(movieDetail.getCoverUrl());
 
-        movieAdapter.setMovies(movieDetail.getMovieSimilar());
+        movieAdapter.setMovies(movieDetail.getMoviesSimilar());
         movieAdapter.notifyDataSetChanged();
     }
 
