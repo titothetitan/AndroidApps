@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.lisawray.groupie:groupie:2.9.0@aar">
+    <CLASSES>
+      <root url="file://E:/.gradle/caches/transforms-2/files-2.1/b3bf7c3cb9b434750648ecd546a59e6e/groupie-2.9.0/res" />
+      <root url="file://E:/.gradle/caches/transforms-2/files-2.1/675edeba6ba11192a61f76d4e1f090b9/groupie-2.9.0/res" />
+      <root url="jar://E:/.gradle/caches/transforms-3/063dd479be971f1b1b3fca9ded586e48/transformed/groupie-2.9.0/jars/classes.jar!/" />
+      <root url="file://E:/.gradle/caches/transforms-3/063dd479be971f1b1b3fca9ded586e48/transformed/groupie-2.9.0/AndroidManifest.xml" />
+      <root url="file://E:/.gradle/caches/transforms-3/063dd479be971f1b1b3fca9ded586e48/transformed/groupie-2.9.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://E:/.gradle/caches/modules-2/files-2.1/com.github.lisawray.groupie/groupie/2.9.0/5001e256d1c82e98555af6e31a3b08a18ef9898e/groupie-2.9.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://E:/.gradle/caches/modules-2/files-2.1/com.github.lisawray.groupie/groupie/2.9.0/38a6a857eaa3fb462a446c37aa415a56bf5e4f5d/groupie-2.9.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

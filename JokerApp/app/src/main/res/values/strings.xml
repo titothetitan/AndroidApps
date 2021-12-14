@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">JokerApp</string>
+    <string name="menu_home">Início</string>
+    <string name="menu_joke_day">Piada do Dia</string>
+    <string name="menu_about">Sobre</string>
+    <string name="social">Social</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_description">© 2021 Tito Schmidt</string>
+</resources>
