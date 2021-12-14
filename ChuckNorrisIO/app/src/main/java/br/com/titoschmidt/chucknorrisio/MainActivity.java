@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // Pega a categoria que o usuário selecionou
                 CategoryItem categoryItem = (CategoryItem) item;
                 Intent abrirJoke = new Intent(MainActivity.this, JokeActivity.class);
-                abrirJoke.putExtra(JokeActivity.CATEGORY_KEY, ((CategoryItem) item).getNomeCategoria());
+                abrirJoke.putExtra(JokeActivity.CATEGORY_KEY, (categoryItem.getNomeCategoria()));
                 startActivity(abrirJoke);
             }
         });
