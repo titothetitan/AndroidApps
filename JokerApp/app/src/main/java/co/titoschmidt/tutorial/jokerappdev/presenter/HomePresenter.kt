@@ -9,7 +9,7 @@ import co.titoschmidt.tutorial.jokerappdev.view.CategoryItem
 
 /*
  * 09/12/2021
- * @author titoesa@gmail.com (Tito Schmidt).
+ * @author titoesa1988@gmail.com (Tito Schmidt).
  * 
  */
 class HomePresenter(

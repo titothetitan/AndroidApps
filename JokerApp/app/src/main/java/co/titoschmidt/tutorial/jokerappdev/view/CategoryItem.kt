@@ -10,7 +10,7 @@ import titoschmidt.tutorial.jokerappdev.R
 
 /*
  * 08/12/2021
- * @author titoesa@gmail.com (Tito Schmidt).
+ * @author titoesa1988@gmail.com (Tito Schmidt).
  * 
  */
 class CategoryItem(val category: Category) : Item<CategoryItem.CategoryViewHolder>(){

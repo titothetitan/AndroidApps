@@ -43,7 +43,7 @@ class MovieActivity : AppCompatActivity() {
         val extras : Bundle ?= intent.extras
         if(extras != null){
             val id : Int = extras.getInt("id")
-            val movieDetailTask = MovieDetailTask(this)
+            //val movieDetailTask = MovieDetailTask(this)
 
             retrofit().create(NetflixAPI::class.java)
                 .getMovieById(id)
