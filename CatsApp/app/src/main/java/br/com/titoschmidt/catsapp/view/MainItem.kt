@@ -21,11 +21,13 @@ class MainItem (val cat: Cat) : Item<MainItem.MainViewHolder>(){
 
     class MainViewHolder(view: View) : GroupieViewHolder(view)
 
-    override fun createViewHolder(itemView: View) = MainViewHolder(itemView)
+    override fun createViewHolder(itemView: View): MainViewHolder {
+        return MainViewHolder(itemView)
+    }
 
     override fun bind(viewHolder: MainViewHolder, position: Int) {
         val imageView = viewHolder.itemView.findViewById<ImageView>(R.id.image_view_cat)
-        Picasso.get().load(cat.imgUrl).into(imageView)
+        Picasso.get().load(cat.imgUrl+".jpeg").into(imageView)
     }
 
     override fun getLayout(): Int {

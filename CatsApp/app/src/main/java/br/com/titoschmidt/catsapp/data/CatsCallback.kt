@@ -9,7 +9,7 @@ import br.com.titoschmidt.catsapp.model.CatsResponse
  */
 interface CatsCallback {
 
-    fun onSuccess(response: List<CatsResponse>)
+    fun onSuccess(response: CatsResponse)
 
     fun onFailure(response: String)
 

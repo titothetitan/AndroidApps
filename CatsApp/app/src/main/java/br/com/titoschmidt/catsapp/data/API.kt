@@ -1,5 +1,6 @@
 package br.com.titoschmidt.catsapp.data
 
+import br.com.titoschmidt.catsapp.model.Cat
 import br.com.titoschmidt.catsapp.model.CatsResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -10,7 +11,6 @@ import retrofit2.http.GET
  * 
  */
 interface API {
-
     @GET("3/gallery/search/?q=cats")
-    fun findAllCats() : Call<List<CatsResponse>>
+    fun findAllCats() : Call<CatsResponse>
 }

@@ -8,11 +8,13 @@ import com.google.gson.annotations.SerializedName
  * 
  */
 
-data class Cat(
-    @SerializedName("link") var imgUrl: String = ""
+data class CatsResponse(
+    @SerializedName("data")
+    val cats: List<Cat>
 )
 
-data class CatsResponse(
-    @SerializedName("data") var catsArr : ArrayList<Cat>
+data class Cat(
+    @SerializedName("link")
+    val imgUrl: String = ""
 )
 

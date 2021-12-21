@@ -4,8 +4,6 @@ import br.com.titoschmidt.catsapp.model.CatsResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.create
-import java.lang.RuntimeException
 
 /*
  * 16/12/2021
@@ -17,23 +15,24 @@ class CatsDataSource {
         HTTPClient.retrofit()
             .create(API::class.java)
             .findAllCats()
-            .enqueue(object : Callback<List<CatsResponse>> {
+            .enqueue(object : Callback<CatsResponse> {
                 override fun onResponse(
-                    call: Call<List<CatsResponse>>,
-                    response: Response<List<CatsResponse>>
+                    call: Call<CatsResponse>,
+                    response: Response<CatsResponse>
                 ) {
                     if(response.isSuccessful){
-                        val cats = response.body()
-                        callback.onSuccess(cats ?: emptyList())
+                        val cat = response.body()
+                        cat?.let { callback.onSuccess(it) }
                     } else {
+                        // erros da chamada
                         val error = response.errorBody()?.toString()
-                        callback.onFailure(error ?: "Erro desconhecido")
+                        callback.onFailure("call error: " + error ?: "Erro desconhecido")
                     }
                     callback.onComplete()
                 }
-
-                override fun onFailure(call: Call<List<CatsResponse>>, t: Throwable) {
-                    callback.onFailure(t.message ?: "Erro interno")
+                // erros do servidor
+                override fun onFailure(call: Call<CatsResponse>, t: Throwable) {
+                    callback.onFailure("server error: " + t.message ?: "Erro interno")
                 }
             })
     }

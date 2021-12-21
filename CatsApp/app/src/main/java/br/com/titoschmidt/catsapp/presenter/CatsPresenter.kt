@@ -1,12 +1,11 @@
 package br.com.titoschmidt.catsapp.presenter
 
-import android.graphics.Color
+import android.util.Log
 import br.com.titoschmidt.catsapp.data.CatsCallback
 import br.com.titoschmidt.catsapp.data.CatsDataSource
 import br.com.titoschmidt.catsapp.model.Cat
 import br.com.titoschmidt.catsapp.model.CatsResponse
 import br.com.titoschmidt.catsapp.view.MainActivity
-import br.com.titoschmidt.catsapp.view.MainItem
 
 /*
  * 16/12/2021
@@ -21,14 +20,21 @@ class CatsPresenter(
         view.showProgressBar()
         dataSource.findAllCats(this)
     }
+    // Converte o ArrayList<Cat> vindo do servidor em
+    override fun onSuccess(response: CatsResponse) {
+        /*
+        val cats = mutableListOf<Cat>()
 
-    override fun onSuccess(response: List<CatsResponse>) {
-        val cats = mutableListOf<MainItem>()
-
-        
+        for(cat in response)
+            cats.add(Cat(cat))
 
 
-        view.showCats(cats)
+        for(cat in response){
+            cats.add(Cat(cat))
+        }
+        */
+        //Log.d("cats", response.cats.toString())
+        view.showCats(response.cats)
     }
 
     override fun onFailure(message: String) {

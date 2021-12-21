@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.titoschmidt.catsapp.R
 import br.com.titoschmidt.catsapp.data.CatsDataSource
+import br.com.titoschmidt.catsapp.model.Cat
+import br.com.titoschmidt.catsapp.model.CatsResponse
 import br.com.titoschmidt.catsapp.presenter.CatsPresenter
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupieAdapter
@@ -34,20 +36,21 @@ class MainActivity : AppCompatActivity() {
 
         progressBar = findViewById<ProgressBar>(R.id.progress_bar)
 
-        recyclerView.layoutManager = GridLayoutManager(this,4)
+        recyclerView.layoutManager = GridLayoutManager(this@MainActivity,4)
 
         recyclerView.adapter = adapter
 
         adapter.notifyDataSetChanged()
 
-        presenter.findAllCats()
-
+        if(adapter.itemCount==0){
+            presenter.findAllCats()
+        }
     }
-
-    fun showCats(cats: List<MainItem>){
+    // Converte a response em ViewHolder para preencher a RecyclerView!
+    fun showCats(response: List<Cat>){
+        val cats = response.map {MainItem(it)}
         adapter.addAll(cats)
         adapter.notifyDataSetChanged()
-
     }
 
     fun showProgressBar(){

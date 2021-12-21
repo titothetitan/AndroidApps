@@ -16,7 +16,7 @@ import titoschmidt.tutorial.jokerappdev.R
 class CategoryItem(val category: Category) : Item<CategoryItem.CategoryViewHolder>(){
 
     class CategoryViewHolder(view: View) : GroupieViewHolder(view)
-
+    // itemView é o LinearLayout em item_category.xml
     override fun createViewHolder(itemView: View) = CategoryViewHolder(itemView)
 
     override fun bind(viewHolder: CategoryViewHolder, position: Int) {
