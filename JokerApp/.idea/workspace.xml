@@ -14,23 +14,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7941f01-deb6-494a-80b9-3c4696e47085" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../CatsApp/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CatsApp/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/data/API.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/data/API.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/data/CatsCallback.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/data/CatsCallback.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/data/CatsDataSource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/data/CatsDataSource.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/model/Cat.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/model/Cat.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/presenter/CatsPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/presenter/CatsPresenter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/view/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/view/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/view/MainItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../CatsApp/app/src/main/java/br/com/titoschmidt/catsapp/view/MainItem.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CatsApp/app/src/main/res/drawable/placeholder_bg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CatsApp/app/src/main/res/drawable/placeholder_bg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CatsApp/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CatsApp/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CatsApp/app/src/main/res/layout/main_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CatsApp/app/src/main/res/layout/main_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FitnessTracker/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FitnessTracker/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FitnessTracker/app/src/main/res/layout/main_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FitnessTracker/app/src/main/res/layout/main_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/co/titoschmidt/tutorial/jokerappdev/view/CategoryItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/co/titoschmidt/tutorial/jokerappdev/view/CategoryItem.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_joke_day.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_joke_day.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

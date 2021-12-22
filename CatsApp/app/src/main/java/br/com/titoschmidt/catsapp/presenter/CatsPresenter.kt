@@ -20,7 +20,7 @@ class CatsPresenter(
         view.showProgressBar()
         dataSource.findAllCats(this)
     }
-    // Converte o ArrayList<Cat> vindo do servidor em
+
     override fun onSuccess(response: CatsResponse) {
         /*
         val cats = mutableListOf<Cat>()

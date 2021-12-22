@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             presenter.findAllCats()
         }
     }
-    // Converte a response em ViewHolder para preencher a RecyclerView!
+    // Converte a response (List<Cat>) em ViewHolder para preencher a RecyclerView!
     fun showCats(response: List<Cat>){
         val cats = response.map {MainItem(it)}
         adapter.addAll(cats)
